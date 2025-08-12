@@ -95,6 +95,7 @@ b. Disable Built-in PostgreSQL Modules (to avoid conflicts)
 
 sudo dnf -qy module disable postgresql
 
+```
  2. Download PostgreSQL RPMs and Dependencies
 Download the required PostgreSQL packages and all their dependencies:
 
