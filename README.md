@@ -96,8 +96,49 @@ b. Disable Built-in PostgreSQL Modules (to avoid conflicts)
 sudo dnf -qy module disable postgresql
 
 ```
- 2. Download PostgreSQL RPMs and Dependencies
+### 2. Download PostgreSQL RPMs and Dependencies
+
 Download the required PostgreSQL packages and all their dependencies:
+
+``bash
+# Create a working directory
+mkdir ~/postgresql-rpms && cd ~/postgresql-rpms
+
+# Download PostgreSQL 16 core packages
+dnf download --resolve --alldeps postgresql16 postgresql16-server postgresql16-contrib postgresql16-libs
+
+```
+
+### 3. Transfer RPMs to the Air-Gapped Server
+
+```bash
+
+scp *.rpm username@192.168.95.70:/opt/postgresql/
+
+cd /opt/postgresql
+
+# Install all RPMs
+sudo yum localinstall *.rpm --disablerepo="*" --skip-broken   (or)  sudo rpm -Uvh *.rpm
+
+```
+### 5. Initialize and Start PostgreSQL Service
+
+``` bash
+
+# Initialize the PostgreSQL database
+sudo /usr/pgsql-16/bin/postgresql-16-setup initdb
+
+# Enable and start PostgreSQL service
+sudo systemctl enable postgresql-16
+sudo systemctl start postgresql-16
+
+# Check status
+sudo systemctl status postgresql-16
+
+
+
+
+
 
 
 
