@@ -99,7 +99,7 @@ sudo dnf -qy module disable postgresql
 
 Download the required PostgreSQL packages and all their dependencies:
 
-``bash
+```bash
 
 ### Create a working directory
 
