@@ -140,6 +140,11 @@ sudo systemctl start postgresql-16
 sudo systemctl status postgresql-16
 
 
+---
+
+
+
+
 
 
 
