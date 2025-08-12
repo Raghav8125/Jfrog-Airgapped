@@ -142,6 +142,49 @@ sudo systemctl status postgresql-16
 
 ---
 
+## 📦 Step 1: Download Artifactory RPM and Dependencies (Online Machine)
+
+On an internet-connected RHEL-compatible machine:
+
+```bash
+# Install DNF download plugin
+sudo dnf install -y 'dnf-command(download)'
+
+# Create a working directory
+mkdir -p ~/jfrog-rpm && cd ~/jfrog-rpm
+
+# Download the Artifactory OSS RPM (replace with desired version)
+wget https://releases.jfrog.io/artifactory/artifactory-rpms/jfrog-artifactory-jcr/jfrog-artifactory-oss-<VERSION>.rpm
+# Download all dependencies
+dnf download --resolve --alldeps jfrog-artifactory-oss-<VERSION>.rpm
+
+```
+##  Step 2: Transfer Files to Air-Gapped Server
+
+```bash
+
+scp *.rpm youruser@192.168.x.x:/opt/jfrog/
+
+```
+## Step 3: Install Artifactory on Air-Gapped Server
+
+```bash
+
+cd /opt/jfrog
+
+# Install all RPMs locally
+sudo yum localinstall *.rpm --disablerepo="*" --skip-broken  (or) sudo rpm -Uvh *.rpm
+
+```
+## Step 4: Start and Enable Artifactory
+
+```bash
+
+sudo systemctl daemon-reexec
+sudo systemctl enable artifactory
+sudo systemctl start artifactory
+sudo systemctl status artifactory
+
 
 
 
