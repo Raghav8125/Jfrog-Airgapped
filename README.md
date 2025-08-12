@@ -70,6 +70,27 @@ java -version
 
 ```
 
+---
+
+## 🛢️ Step 2: Install PostgreSQL 16 in an Air-Gapped Environment
+
+To install PostgreSQL 16 on an air-gapped JFrog Artifactory server, follow the steps below using a connected system to prepare the RPMs.
+
+---
+
+### 🌐 1. Download Required PostgreSQL 16 RPM Packages on Internet-Connected Machine
+
+#### a. Add the PostgreSQL YUM Repository
+
+Before downloading RPMs, install the PostgreSQL repository package:
+
+```bash
+# Download the latest repository RPM
+wget https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+# Install the repository
+sudo rpm -ivh pgdg-redhat-repo-latest.noarch.rpm
+
 
 
 
