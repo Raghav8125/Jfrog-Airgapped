@@ -139,10 +139,9 @@ sudo systemctl start postgresql-16
 # Check status
 sudo systemctl status postgresql-16
 
-
+```
 ---
-
-## 📦 Step 1: Download Artifactory RPM and Dependencies (Online Machine)
+# 📦 Step 1: Download Artifactory RPM and Dependencies (Online Machine)
 
 On an internet-connected RHEL-compatible machine:
 
@@ -159,14 +158,14 @@ wget https://releases.jfrog.io/artifactory/artifactory-rpms/jfrog-artifactory-jc
 dnf download --resolve --alldeps jfrog-artifactory-oss-<VERSION>.rpm
 
 ```
-##  Step 2: Transfer Files to Air-Gapped Server
+#  Step 2: Transfer Files to Air-Gapped Server
 
 ```bash
 
 scp *.rpm youruser@192.168.x.x:/opt/jfrog/
 
 ```
-## Step 3: Install Artifactory on Air-Gapped Server
+# Step 3: Install Artifactory on Air-Gapped Server
 
 ```bash
 
@@ -176,7 +175,7 @@ cd /opt/jfrog
 sudo yum localinstall *.rpm --disablerepo="*" --skip-broken  (or) sudo rpm -Uvh *.rpm
 
 ```
-## Step 4: Start and Enable Artifactory
+# Step 4: Start and Enable Artifactory
 
 ```bash
 
