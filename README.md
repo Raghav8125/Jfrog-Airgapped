@@ -39,18 +39,33 @@ Before proceeding with the installation, ensure the following system requirement
 
 ---
 
-## ☕ Step 1: Install Java 17
+## ☕ Step 1: Install Java 17 in an Air-Gapped Environment
 
-JFrog requires Java 11+, and we will install **OpenJDK 17**, which is fully supported and stable.
+In an air-gapped setup, you must manually download Java RPMs and their dependencies, transfer them to the target server, and install them locally.
 
-### ✅ For RHEL / CentOS / Rocky / AlmaLinux
+### 🔄 1. Download Java 17 RPM on an Internet-Enabled Machine
+
+Use an internet-connected RHEL-based system to download the RPM for Java 17 and all its dependencies.
 
 ```bash
-# Update the system
-sudo yum update -y
+# Create a working directory
+mkdir -p ~/java-rpms && cd ~/java-rpms
 
-# Install OpenJDK 17
-sudo yum install -y java-17-openjdk java-17-openjdk-devel
+# Download Java 17 RPM and all required dependencies
+dnf download --resolve --alldeps java-17-openjdk java-17-openjdk-devel
 
-# Verify Java installation
+2. Transfer RPM Files to Air-Gapped Jenkins/JFrog Server
+Use scp  to transfer the downloaded .rpm files:
+
+scp *.rpm username@192.168.95.70:/opt/java/
+
+3. Install Java RPMs Locally on the Air-Gapped Server
+
+cd /opt/java
+
+# Recommended method using yum localinstall
+sudo yum localinstall *.rpm --disablerepo="*" --skip-broken
+
 java -version
+
+
