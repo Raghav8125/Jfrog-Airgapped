@@ -76,7 +76,6 @@ java -version
 
 To install PostgreSQL 16 on an air-gapped JFrog Artifactory server, follow the steps below using a connected system to prepare the RPMs.
 
----
 
 ### 🌐 1. Download Required PostgreSQL 16 RPM Packages on Internet-Connected Machine
 
@@ -96,20 +95,22 @@ b. Disable Built-in PostgreSQL Modules (to avoid conflicts)
 sudo dnf -qy module disable postgresql
 
 ```
-### 2. Download PostgreSQL RPMs and Dependencies
+# 2. Download PostgreSQL RPMs and Dependencies
 
 Download the required PostgreSQL packages and all their dependencies:
 
 ``bash
 # Create a working directory
+
 mkdir ~/postgresql-rpms && cd ~/postgresql-rpms
 
 # Download PostgreSQL 16 core packages
+
 dnf download --resolve --alldeps postgresql16 postgresql16-server postgresql16-contrib postgresql16-libs
 
-```
+---
 
-### 3. Transfer RPMs to the Air-Gapped Server
+# 3. Transfer RPMs to the Air-Gapped Server
 
 ```bash
 
@@ -121,7 +122,7 @@ cd /opt/postgresql
 sudo yum localinstall *.rpm --disablerepo="*" --skip-broken   (or)  sudo rpm -Uvh *.rpm
 
 ```
-### 5. Initialize and Start PostgreSQL Service
+# 5. Initialize and Start PostgreSQL Service
 
 ``` bash
 
