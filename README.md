@@ -175,7 +175,7 @@ cd /opt/jfrog
 sudo yum localinstall *.rpm --disablerepo="*" --skip-broken  (or) sudo rpm -Uvh *.rpm
 
 ```
-# Step 4: Start and Enable Artifactory
+### Step 4: Start and Enable Artifactory
 
 ```bash
 
@@ -183,6 +183,32 @@ sudo systemctl daemon-reexec
 sudo systemctl enable artifactory
 sudo systemctl start artifactory
 sudo systemctl status artifactory
+
+# Configure a connection to the database
+
+●	Login as postgres user with the new password.
+
+su - postgres psql
+
+# Creating an Artifactory User and Database
+
+CREATE USER artifactory WITH PASSWORD 'password';
+CREATE DATABASE artifactory WITH OWNER=artifactory ENCODING='UTF8';
+GRANT ALL PRIVILEGES ON DATABASE artifactory TO artifactory;
+
+#	Edit the database connection details in the /opt/jfrog/artifactory/var/etc/system.yaml config file
+
+refer system.yaml
+
+systemctl start artifactory
+systemctl enable artifactory
+
+
+Access your Jfrog artifactory UI on <server_ip>:8081
+
+```
+
+
 
 
 
